@@ -1,0 +1,85 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+ 
+ 
+ <div class="hero-image">
+  <div class="hero-text">
+    <h1 style="font-size:5rem"><span style="color:#fe1919; font-weight: 900">Your</span><span style="color:#fec119;font-weight: 700">Event</span></h1>
+    <p>Best Events For You !</p>
+    <a href="<%=new_event_path%>" class="mt-2 mb-5 col-sm-12 col-md-6 col-lg-6 btn btn-primary pulse rounded-pill p-3" style="border: none;background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 0%, rgba(252,176,69,1) 100%);">Create your Event</a>
+    <div><a class="px-3 py-2"style="background-color:none; border:1px solid #fe1919; color:#fe8819; border-radius:15px"href="#main">Découvrir</a></div>
+    
+  </div>
+</div> 
+
+
+<div id="main"class="row justify-content-center mt-5">
+
+</div>
+<h2 class="row justify-content-center mb-5" style="color:#fe1919"> Notre coup de coeur du jour </h2>
+
+<div class="container row justify-content-center">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+    <div class="card card-small card-home pulse">
+        <div class="thumbnail">           
+                <img alt="Opt alp thumbnail" style ="filter: brightness(50%);"src="<%=@city.sample%>">
+                <a href="<%=event_path(@event.id)%>">
+                    <div class="thumb-cover"></div>
+                </a>            
+                <div class="details">
+                <a href="<%=user_path(@event.admin_id)%>"class="user">
+                     <div class="user-photo">
+                          <img alt="Thumb" src="<%=@avatar.sample%>">
+                     </div>
+                     <div class="name"><%=User.find(@event.admin_id).first_name%>  <%=User.find(@event.admin_id).last_name%></div>
+                </a> 
+            </div>            
+        </div>
+        <div class="card-info">
+            <div class="moving">
+                    <h3><%= @event.title%></h3>
+                    <p class="p"><%= @event.description%></p>
+                    <p>Date : <%=@event.start_date%></p>
+                    <a class="btn btn-primary active mt-2 mb-4" href="<%=event_path(@event.id)%>">Détails</a>
+                    <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h2 class="row justify-content-center mb-5" style="color:#fe1919 "> Best Last Events</h2>
+<div class="container row justify-content-center">
+<% @events.each do |event| %>
+
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+    <div class="card card-small card-home">
+        <div class="thumbnail">           
+                <img alt="Opt alp thumbnail" style ="filter: brightness(50%);"src="<%=@city.sample%>">
+                <a href="<%=event_path(event.id)%>">
+                    <div class="thumb-cover"></div>
+                </a>            
+                <div class="details">
+                <a href="<%=user_path(event.admin_id)%>"class="user">
+                     <div class="user-photo">
+                          <img alt="Thumb" src="<%=@avatar.sample%>">
+                     </div>
+                     <div class="name"><%=User.find(event.admin_id).first_name%>  <%=User.find(event.admin_id).last_name%></div>
+                </a> 
+            </div>            
+        </div>
+        <div class="card-info">
+            <div class="moving">
+                    <h3><%= event.title%></h3>
+                    <p class="p"><%= event.description%></p>
+                    <p>Date : <%=event.start_date%></p>
+                    <a class="btn btn-info active mt-2 mb-4" href="<%=event_path(event.id)%>">Détails</a>
+                    <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <% end %>
